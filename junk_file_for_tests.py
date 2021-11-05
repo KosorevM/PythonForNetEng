@@ -1,3 +1,2 @@
-import jinja2
-a = 5
+a = 'mikhail'
 print(a)

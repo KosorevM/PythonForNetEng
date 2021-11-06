@@ -1,2 +1,0 @@
-a = 'mikhail'
-print(a)

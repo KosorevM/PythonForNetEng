@@ -22,3 +22,9 @@
 """
 
 config = "switchport trunk allowed vlan 1,3,10,20,30,100"
+find = "vlan"
+len_find = len(find)
+index = config.find(find)
+config = config[index+len_find+1:]
+result = config.split(",")
+print(result)

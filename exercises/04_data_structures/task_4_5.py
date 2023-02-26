@@ -22,13 +22,7 @@
 
 command1 = "switchport trunk allowed vlan 1,2,3,5,8"
 command2 = "switchport trunk allowed vlan 1,3,8,9"
-find = "vlan"
-len_find = len(find)
-index = command1.find(find)
-command1_1 = command1[index+len_find+1:]
-command2_2 = command2[index+len_find+1:]
-command1 = command1_1.split(",")
-command2 = command2_2.split(",")
-result = list(set(command1) & set(command2))
-result.sort()
+command1 = command1.split()[-1].split(',')
+command2 = command2.split()[-1].split(',')
+result = sorted(set(command1) & set(command2))
 print(result)

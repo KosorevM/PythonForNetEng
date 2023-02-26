@@ -27,13 +27,5 @@
 
 ip = "192.168.3.1"
 a = ip.split(".")
-a_0 = int(a[0])
-a_1 = int(a[1])
-a_2 = int(a[2])
-a_3 = int(a[3])
-a_0_0 = "{0:08b}".format(a_0)
-a_1_0 = "{0:08b}".format(a_1)
-a_2_0 = "{0:08b}".format(a_2)
-a_3_0 = "{0:08b}".format(a_3)
-print(
-    "{:<10} {:<10} {:<10} {:<10} \n{:<10} {:<10} {:<10} {:<10}".format(a_0, a_1, a_2, a_3, a_0_0, a_1_0, a_2_0, a_3_0))
+result = '{:<10}' * 4 + '\n' + '{:08b}  ' * 4
+print(result.format(int(a[0]), int(a[1]), int(a[2]), int(a[3]), int(a[0]), int(a[1]), int(a[2]), int(a[3])))

@@ -43,5 +43,4 @@ result = ('Network:' + '\n' +
           + '\n' + 'Mask:' + '\n' + '/{4:}' + '\n' +
           '{5:<10}'  + '{6:<10}'  + '{7:<10d}'  + '{8:<10d}'  + '\n' + '{5:08b}  ' + '{6:08b}  ' + '{7:08b}  ' + '{8:08b}  ')
 print(result.format(int(net_in[0]), int(net_in[1]), int(net_in[2]), int(net_in[3]), int(net_in[4]),
-                    first_octet_mask, second_octet_mask, third_octet_mask, forth_octet_mask,
-                    mask_bin[0:8], mask_bin[8:16], mask_bin[16:24], mask_bin[24:32]))
+                    first_octet_mask, second_octet_mask, third_octet_mask, forth_octet_mask))

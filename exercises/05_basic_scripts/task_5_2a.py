@@ -49,3 +49,24 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+net_in = input('Введите IP-сеть: ').replace('/', '.').split('.')
+mask = int(net_in[4])
+mask_diff = 32 - mask
+mask_bin = '1' * mask + '0' * mask_diff
+ip_bin = '{0:08b}{1:08b}{2:08b}{3:08b}'.format(int(net_in[0]), int(net_in[1]), int(net_in[2]), int(net_in[3]))
+net_bin = ip_bin[:mask] + '0' * mask_diff
+first_octet_ip = int(net_bin[0:8],2)
+second_octet_ip = int(net_bin[8:16], 2)
+third_octet_ip = int(net_bin[16:24], 2)
+forth_octet_ip = int(net_bin[24:32], 2)
+first_octet_mask = int(mask_bin[0:8],2 )
+second_octet_mask = int(mask_bin[8:16], 2)
+third_octet_mask = int(mask_bin[16:24], 2)
+forth_octet_mask = int(mask_bin[24:32], 2)
+result = ('Network:' + '\n' +
+          '{0:<10}'  + '{1:<10}'  + '{2:<10}'  + '{3:<10}'  + '\n' + '{0:08b}  ' + '{1:08b}  ' + '{2:08b}  ' + '{3:08b}  '
+          + '\n' + 'Mask:' + '\n' + '/{4:}' + '\n' +
+          '{5:<10}'  + '{6:<10}'  + '{7:<10d}'  + '{8:<10d}'  + '\n' + '{5:08b}  ' + '{6:08b}  ' + '{7:08b}  ' + '{8:08b}  ')
+print(result.format(first_octet_ip, second_octet_ip, third_octet_ip, forth_octet_ip, int(net_in[4]),
+                    first_octet_mask, second_octet_mask, third_octet_mask, forth_octet_mask))

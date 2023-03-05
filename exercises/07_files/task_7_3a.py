@@ -40,3 +40,22 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+list = []
+with open('CAM_table.txt') as f:
+    for line in f:
+        line_list = line.split()
+        if len(line_list) > 1:
+            if len(line_list[1]) == 14:
+                list.append(line_list)
+            else:
+                continue
+        else:
+            continue
+
+for line in list:
+        line[0] = int(line[0])
+
+list.sort()
+
+for line in list:
+        print('{:<9}{:20}{:10}'.format(line[0],line[1],line[3]))

@@ -20,6 +20,7 @@
 ip_addr_in = input("Введите IP-адрес: ")
 ip_addr_correct = False
 counter = 0
+
 while not ip_addr_correct:
     for symbol in ip_addr_in:
         if symbol == '.':

@@ -15,6 +15,7 @@
 
 ip_addr_in = input("Введите IP-адрес: ")
 ip_addr_octets = ip_addr_in.split('.')
+
 if int(ip_addr_octets[0]) >=1 and int(ip_addr_octets[0])<=223:
     print('unicast')
 elif int(ip_addr_octets[0]) >= 224 and int(ip_addr_octets[0]) <= 239:

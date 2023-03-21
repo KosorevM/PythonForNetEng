@@ -78,8 +78,6 @@ def convert_config_to_dict(config_filename):
                 else:
                     command_first = line.rstrip('\n')
                     config_dic[command_first] = []
-
-
     return config_dic
 
 convert_config_to_dict('config_sw1.txt')

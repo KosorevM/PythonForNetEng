@@ -71,9 +71,7 @@ def convert_config_to_dict(config_filename):
         config_dic = {}
         command_first = ''
         for line in f:
-            if line == "\n":
-                continue
-            if ignore_command(line, ignore) != True:
+            if ignore_command(line, ignore) != True and line != "\n":
                 if line[0] == " ":
                     line = line.rstrip('\n').strip()
                     config_dic[command_first].append(line)
@@ -83,6 +81,5 @@ def convert_config_to_dict(config_filename):
 
 
     return config_dic
-
 
 convert_config_to_dict('config_sw1.txt')

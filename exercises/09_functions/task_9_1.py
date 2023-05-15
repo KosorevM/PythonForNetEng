@@ -81,7 +81,6 @@ def generate_access_config(intf_vlan_mapping, access_template):
         for command in access_template:
             if command.endswith('vlan'):
                 a.append(f"{command} {intf_vlan_mapping[int]}")
-                continue
             else:
                 a.append(command)
     return a

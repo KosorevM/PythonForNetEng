@@ -44,13 +44,8 @@ list = []
 with open('CAM_table.txt') as f:
     for line in f:
         line_list = line.split()
-        if len(line_list) > 1:
-            if len(line_list[1]) == 14:
-                list.append(line_list)
-            else:
-                continue
-        else:
-            continue
+        if len(line_list) > 1 and len(line_list[1]) == 14:
+            list.append(line_list)
 
 for line in list:
         line[0] = int(line[0])

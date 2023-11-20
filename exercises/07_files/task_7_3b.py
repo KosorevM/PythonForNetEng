@@ -24,13 +24,8 @@ vlan_in = input("Введите номер vlan: ")
 with open('CAM_table.txt') as f:
     for line in f:
         line_list = line.split()
-        if len(line_list) > 1:
-            if len(line_list[1]) == 14 and line_list[0] == vlan_in:
-                list.append(line_list)
-            else:
-                continue
-        else:
-            continue
+        if len(line_list) > 1 and len(line_list[1]) == 14 and line_list[0] == vlan_in:
+            list.append(line_list)
 
 for line in list:
         line[0] = int(line[0])

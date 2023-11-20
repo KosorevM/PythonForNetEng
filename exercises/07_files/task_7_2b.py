@@ -23,9 +23,5 @@ from sys import argv
 with open(argv[1]) as f:
     with open(argv[2], 'w') as dst:
         for line in f:
-            if line[0] == '!':
-                continue
-            elif ignore[0] in line or ignore[1] in line or ignore[2] in line:
-                continue
-            else:
+            if not line.startswith('!') and not (ignore[0] in line or ignore[1] in line or ignore[2] in line):
                 dst.write(line.rstrip() + '\n')

@@ -23,10 +23,5 @@
 with open('CAM_table.txt') as f:
     for line in f:
         line_list = line.split()
-        if len(line_list) > 1:
-            if len(line_list[1]) == 14:
+        if len(line_list) > 1 and len(line_list[1]) == 14:
                 print('{:9}{:20}{:10}'.format(line_list[0],line_list[1],line_list[3]))
-            else:
-                continue
-        else:
-            continue

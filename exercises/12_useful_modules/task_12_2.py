@@ -34,3 +34,36 @@
  '172.21.41.129', '172.21.41.130', '172.21.41.131', '172.21.41.132']
 
 """
+import ipaddress
+def convert_ranges_to_ip_list(ip_list):
+    result = []
+
+    for ip_entry in ip_list:
+        if '-' in ip_entry:
+            start_ip, end_ip = ip_entry.split('-')
+            start_parts = start_ip.split('.')
+            end_parts = end_ip.split('.')
+
+            if len(end_parts) == 1:
+                # If the end IP is in the form of a single octet, append it to the start IP
+                end_parts = start_parts[:-1] + [end_parts[0]]
+
+            start_octet = int(start_parts[3])
+            end_octet = int(end_parts[3]) + 1  # Add 1 to include the end IP in the range
+
+            for octet in range(start_octet, end_octet):
+                result.append('.'.join(start_parts[:-1] + [str(octet)]))
+        else:
+            result.append(ip_entry)
+
+    return result
+
+# Пример использования:
+ip_addresses = ['8.8.4.4', '1.1.1.1-3', '172.21.41.128-172.21.41.132']
+
+result_ip_list = convert_ranges_to_ip_list(ip_addresses)
+print(result_ip_list)
+
+
+if __name__ == "__main__":
+    convert_ranges_to_ip_list(ip_addresses)

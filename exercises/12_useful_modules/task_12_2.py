@@ -35,6 +35,8 @@
 
 """
 import ipaddress
+
+
 def convert_ranges_to_ip_list(ip_list):
     result = []
 
@@ -58,12 +60,12 @@ def convert_ranges_to_ip_list(ip_list):
 
     return result
 
+
 # Пример использования:
 ip_addresses = ['8.8.4.4', '1.1.1.1-3', '172.21.41.128-172.21.41.132']
 
 result_ip_list = convert_ranges_to_ip_list(ip_addresses)
 print(result_ip_list)
-
 
 if __name__ == "__main__":
     convert_ranges_to_ip_list(ip_addresses)

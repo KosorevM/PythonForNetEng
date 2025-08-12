@@ -24,3 +24,19 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Проверить работу функции на содержимом файла sh_cdp_n_sw1.txt
 """
+
+def parse_sh_cdp_neighbors(command_output):
+    result_dict= {}
+    for line in command_output.split("\n"):
+        if ">" in line:
+            hostname = line.split(">")[0]
+        if "/" in line:
+            local_intf = line.split()[1]+ " " + line.split()[2]
+            remote_hostname = line.split()[0]
+            remote_intf = line.split()[-2]+ " " + line.split()[-1]
+            result_dict.setdefault(hostname, {})[local_intf] = {remote_hostname: remote_intf}
+    return result_dict
+
+if __name__ == "__main__":
+    with open("sh_cdp_n_sw1.txt") as f:
+        print(parse_sh_cdp_neighbors(f.read()))

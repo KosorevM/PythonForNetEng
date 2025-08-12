@@ -43,3 +43,35 @@
 > pip install graphviz
 
 """
+
+import yaml
+from pprint import pprint
+from draw_network_graph import draw_topology
+
+def transform_topology(topology_filename):
+    #Удаляем дубли
+    with open(topology_filename) as f:
+        templates = yaml.safe_load(f)
+    for device, interface in templates.items():
+        for interface_local, neighbor in interface.items():
+            for neighbor_device, neighbor_interface in neighbor.items():
+                del templates[neighbor_device][neighbor_interface]
+    list_of_empty_devices = []
+    for device, interface in templates.items():
+        if templates.get(device) == {}:
+            list_of_empty_devices.append(device)
+    for device in list_of_empty_devices:
+        del templates[device]
+
+    #Создаем новый словарь и помещаем в него итоговый результат
+    result_dict = {}
+    for device, interface in templates.items():
+        for interface_local, neighbor in interface.items():
+            for neighbor_device, neighbor_interface in neighbor.items():
+                key = device, interface_local
+                value = neighbor_device, neighbor_interface
+                result_dict[key] = value
+    return (result_dict)
+
+if __name__ == "__main__":
+    draw_topology(transform_topology('topology.yaml'))

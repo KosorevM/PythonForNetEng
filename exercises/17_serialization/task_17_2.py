@@ -44,8 +44,34 @@
 """
 
 import glob
+import csv
+import re
 
-sh_version_files = glob.glob("sh_vers*")
-# print(sh_version_files)
+def parse_sh_version(sh_version):
+    for line in sh_version.splitlines():
+        if "Cisco IOS Software" in line:
+            ios = re.search(r"\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+([^,]+)", line).group(1)
+        elif "image file is" in line:
+            image = re.search(r"\S+\s+\S+\s+\S+\s+\S+\s+(\S+)", line).group(1)[1:-1]
+        elif "uptime" in line:
+            uptime = re.search(r"(\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+$)", line).group(1)
+    return_tuple = (ios, image, uptime)
+    return return_tuple
 
-headers = ["hostname", "ios", "image", "uptime"]
+
+def write_inventory_to_csv(data_filenames, csv_filename):
+    with open(csv_filename, "w") as f:
+        writer = csv.writer(f, dialect='excel')
+        writer.writerow(["hostname", "ios", "image", "uptime"])
+        for filename in data_filenames:
+            with open(filename) as f:
+                sh_version = f.read()
+                writer.writerow([filename.split(".")[0].split("_")[2], parse_sh_version(sh_version)[0], parse_sh_version(sh_version)[1], parse_sh_version(sh_version)[2]])
+
+
+list_of_files_input = ["sh_version_r1.txt", "sh_version_r2.txt", "sh_version_r3.txt"]
+
+if __name__ == "__main__":
+    write_inventory_to_csv(list_of_files_input, "routers_inventory.csv")
+    sh_version_files = glob.glob("sh_vers*")
+    print(sh_version_files)
